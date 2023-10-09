@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <title>Ürünler ve Fiyatları - Ders Aktif Ödev Page 1</title>
+
+</head>
+<body>
+  
+    <h1>Ürünler ve Fiyatları</h1>
+  
+  <ul id="urun-listesi"></ul>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <script>
+    
+      const ul = document.getElementById('urun-listesi');
+
+    axios.get('https://northwind.vercel.app/api/products')
+      .then(function (response) {
+        const data = response.data;
+
+        data.forEach(function (item) {
+          const li = document.createElement('li');
+          li.textContent = `${item.productName} - $${item.unitPrice}`;
+          
+          if (item.unitPrice > 50) {
+            li.style.color = 'red';
+         
+          }
+          
+          ul.appendChild(li);
+       
+        });
+     
+      })
+      .catch(function (error) {
+        console.error('Veri çekme işlemi başarısız:', error);
+      
+      });
+  
+  
+  </script>
+</body>
+</html>
